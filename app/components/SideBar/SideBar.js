@@ -20,14 +20,16 @@ function SideBar() {
     const [verifyEmail, setVerifyEmail] = useState();
     const [verifymodel, setVerifyModel] = useState(false);
     const [safemodel, setSafeModel] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeComponent, setActiveComponent] = useState('Dashboard');
 
+
     const OpenVerifyModel = () => {
-        setVerifyModel(true)
+        setVerifyModel((prev) => !prev);
     }
 
     const OpenSafeModel = () => {
-        setSafeModel(true)
+        setSafeModel((prev) => !prev);
     }
 
     console.log(verifyEmail)
@@ -61,13 +63,16 @@ function SideBar() {
     return (
         <nav>
             <div className='flex'>
-                <div className='max-w-[265px] flex-shrink-0 flex flex-col justify-between h-screen overflow-y-auto hide-scrollbar'>
+                <div className={`max-w-[265px] flex-shrink-0 flex flex-col justify-between h-screen overflow-y-auto hide-scrollbar
+                            fixed lg:relative z-50 lg:z-auto transform lg:translate-x-0 
+                            transition-transform duration-300 ease-in-out lg:max-w-[265px]
+                            ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} bg-white`}>
                     <div className=''>
-                        <h1 className='text-center text-[22px] font-semibold mt-12 mb-16'>inbo<span className='text-[22px] font-extrabold'>x</span><span className='text-primary'>automation</span></h1>
+                        <h1 onClick={() => setSidebarOpen(!sidebarOpen)} className='text-center text-[22px] font-sans font-semibold mt-12 mb-16 cursor-pointer'>inbo<span className='text-[22px] font-extrabold'>x</span><span className='text-primary'>automation</span></h1>
                         <div className=''>
                             {
                                 sidebar.map((item, index) => (
-                                    <li key={index} className='flex items-center space-x-2 hover:bg-gray-500 py-4 pl-6 pr-2' onClick={() => setActiveComponent(item.component)}>
+                                    <li key={index} className='flex items-center space-x-2  py-4 pl-6 pr-2 hover:bg-gradient-to-r hover:from-gray-200 hover:via-transparent hover:to-transparent' onClick={() => setActiveComponent(item.component)}>
                                         {item.logo}
                                         <button className='text-[#9A9AA9] text-[16px] font-extrabold'>{item.title}</button>
                                     </li>
@@ -93,8 +98,8 @@ function SideBar() {
                                 <ProfilePicSVG />
                             </div>
                             <div>
-                                <h1 className='text-[12px] text-[#030229] font-semibold'>Saad Javed</h1>
-                                <h3 className='text-[10px] text-[#030229] font-semibold'>See Profile</h3>
+                                <h1 className='text-[12px] text-[#030229] font-sans font-semibold'>Saad Javed</h1>
+                                <h3 className='text-[10px] text-[#030229] font-sans font-semibold'>See Profile</h3>
                             </div>
                             <div>
                                 <LogoutIconSVG />
@@ -107,7 +112,15 @@ function SideBar() {
                 {/* Sectio for flex */}
                 <div className='w-full flex flex-col h-screen bg-gray-100'>
                     <div className='flex justify-between items-center mt-11 px-6 mb-2'>
+                        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden text-black">
+                            {/* Hamburger icon */}
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+
                         <h1 className='text-[#030229] text-[24px] font-black '>{activeComponent}</h1>
+
                         <div className='flex items-center'>
                             <div className='bg-white px-4 py-2.5 rounded-l-lg'>
                                 <input type="text" name="" id="" placeholder='Enter Email Address' className='focus:outline-none' value={verifyEmail} onChange={(e) => setVerifyEmail(e.target.value)} />
@@ -118,8 +131,8 @@ function SideBar() {
 
 
                         {verifymodel && (
-                            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
-                                <div className='bg-white rounded-lg w-[500px]'>
+                            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50' onClick={OpenVerifyModel}>
+                                <div className='bg-white rounded-lg w-[500px]' onClick={(e) => e.stopPropagation()}>
                                     <div className='py-6 px-20'>
                                         <div className='flex items-center justify-center mb-4'>
                                             <div className=''>

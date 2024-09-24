@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState} from 'react'
 
 function ProfileSettings() {
+
+    const [submitmodel, setSubmitmodel] = useState(false);
+
+
+    const OpenSafeModel = () => {
+        setSubmitmodel((prev) => !prev);
+    }
+
+    
+
     return (
-        <div className='mb-10'>
+        <div className='mb-10' >
             <div className='min-w-[1000px] bg-white ml-20 mr-14 rounded-xl'>
                 <div>
                     <div className='flex justify-between items-center px-10 pt-6'>
                         <h1 className='text-[#030229] text-[18px] font-black'>General Information</h1>
                         <div>
-                            <button className='bg-primary text-[#030229] text-[10px] font-semibold px-6 py-1.5 rounded-lg'>Save All</button>
+                            <button className='bg-primary text-[#030229] text-[10px] font-semibold px-6 py-1.5 rounded-lg' onClick={OpenSafeModel}>Save All</button>
                         </div>
                     </div>
 
@@ -39,11 +49,11 @@ function ProfileSettings() {
                     </div>
                 </div>
 
-                <hr  className='w-full'/>
+                <hr className='w-full' />
 
                 <div>
                     <div className='flex justify-between items-center px-10 pt-4'>
-                        <h1 className='text-[#030229] text-[18px] font-black'>Update Password</h1> 
+                        <h1 className='text-[#030229] text-[18px] font-black'>Update Password</h1>
                     </div>
 
                     <div className='flex items-center space-x-24 px-10 py-6'>
@@ -73,6 +83,29 @@ function ProfileSettings() {
                     </div>
                 </div>
             </div>
+
+            {submitmodel && (
+                <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' onClick={(e) => {e.stopPropagation(); OpenSafeModel()}}>
+                    <div className='bg-white rounded-lg w-[500px] border border-gray-500' onClick={(e) => e.stopPropagation()}>
+                        <div className='py-6 px-20'>
+                            <div className='flex items-center justify-center mb-4'>
+                                <div className=''>
+                                    <h1 className='text-[32px] text-[#030229] font-semibold '>Emails Successfully</h1>
+                                    <h1 className='text-[32px] text-[#030229] font-semibold text-center'>Submitted</h1>
+                                </div>
+                                {/* <button className='font-bold' onClick={() => setVerifyModel(false)}>&#10005;</button> */}
+                            </div>
+                            <h3 className='w-[330px] text-[#030229] text-[18px] font-normal mb-4'>
+                                You have sucessfully submitted the emails.Now the verification will start automatically within few moments. Please note that, the required credits has been deducted from your account. However, after the verifcation completes, you will get credits refund for all the emails with “unknown” status.
+                            </h3>
+                            <div className='flex items-center space-x-3 px-6'>
+                                <button className='px-10 py-2 bg-primary border border-[#D0D5DD] text-[#000000] rounded-md' onClick={(e) =>OpenSafeModel()}>Cancel</button>
+                                <button className='px-6 py-2 text-white bg-[#030229] rounded-lg' >Stay Here</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

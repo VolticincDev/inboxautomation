@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import DonutChart from './DonutChart';
 import LineChart from './LineChart';
+import PlotArea from './PlotArea';
 
 
 
@@ -68,8 +69,8 @@ function Dashboard() {
 
             </div>
 
-            <div>
-                <div className='w-[650px] bg-white mt-5 mb-5 px-8 py-6 rounded-lg'>
+            <div className='flex items-center justify-between mt-5 mb-5'>
+                <div className='w-[650px] bg-white px-8 py-6 rounded-lg'>
                     <h1 className='text-[#030229] text-[18px] font-black text-center mb-4'>Credit History</h1>
                     <table className='w-full px-4'>
 
@@ -97,6 +98,31 @@ function Dashboard() {
                             }
                         </tbody>
                     </table>
+                </div>
+
+                {/* <PlotArea/> */}
+                <div className='min-w-[400px] h-[408px] bg-white rounded-xl'>
+                    <div className='flex items-center justify-between bg-white p-4 rounded-lg'>
+                        <h1 className='text-[#030229] text-[18px] font-black'>Lifetime Usage</h1>
+                        <div className='border rounded-full px-3 py-1.5'>
+                            <select
+                                name="year"
+                                id="yearDropdown"
+                                value={selectedYear}
+                                onChange={(e) => setSelectedYear(e.target.value)}
+                                className='focus:outline-none text-[12px] font-semibold'
+                            >
+                                {years.map((year) => (
+                                    <option key={year} value={year}>
+                                        {year}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className='px-10 pb-10 pt-2'>
+                        <DonutChart />
+                    </div>
                 </div>
             </div>
         </div>

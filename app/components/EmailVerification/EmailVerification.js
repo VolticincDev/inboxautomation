@@ -9,9 +9,10 @@ function EmailVerification() {
     const [email, setemail] = useState();
 
     const [submitmodel, setSubmitmodel] = useState(false);
+
     const OpenSafeModel = (event) => {
         event.preventDefault();
-        setSubmitmodel(!submitmodel)
+        setSubmitmodel((prev) => !prev);
     }
 
     // console.log(task)
@@ -53,7 +54,7 @@ function EmailVerification() {
                     <div className=' flex justify-center items-center space-x-2 bg-primary px-20 py-3 rounded-xl mt-4'>
                         <StartVerificationSVG />
                         <div>
-                            <button className='text-[14px] text-[#030229] font-semibold' onClick={OpenSafeModel}>Start Verification</button>
+                            <button className='text-[14px] text-[#030229] font-semibold' >Start Verification</button>
                         </div>
 
                     </div>
@@ -93,8 +94,8 @@ function EmailVerification() {
             </div>
 
             {submitmodel && (
-                <div className='fixed inset-0 flex items-center justify-center'>
-                    <div className='bg-white rounded-lg w-[500px] border border-gray-500'>
+                <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' onClick={OpenSafeModel}>
+                    <div className='bg-white rounded-lg w-[500px] border border-gray-500' onClick={(e) => e.stopPropagation()}>
                         <div className='py-6 px-20'>
                             <div className='flex items-center justify-center mb-4'>
                                 <div className=''>

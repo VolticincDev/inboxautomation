@@ -1,6 +1,14 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
+import { DM_Sans } from '@next/font/google';
+
+const dmSans = DM_Sans({
+  weight: ['400', '500', '600' , '700', '800'], // Specify font weights as per your need
+  subsets: ['latin'], // Choose the subsets required
+  display: 'swap', // Optional: this can prevent layout shift
+});
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -20,8 +28,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+    {/* ${geistSans.variable} ${geistMono.variable} */}
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${dmSans.className} antialiased`}
       >
         {children}
       </body>
