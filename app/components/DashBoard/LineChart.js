@@ -11,7 +11,6 @@ function LineChart() {
         labels: ['10am', '11am', '12am', '01am', '02am', '03am', '04am', '05am', '06am', '07am'],
         datasets: [
             {
-                // label: 'Verification Activity',
                 data: [50, 60, 45, 35, 60, 40, 55, 45, 70, 50],
                 fill: true, // Shading under the line
                 backgroundColor: 'rgba(75,192,192,0.2)', // Shaded area color
@@ -26,12 +25,15 @@ function LineChart() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false, // Allows the chart to fill its parent container
         scales: {
             y: {
                 beginAtZero: true,
                 max: 100,
+                ticks: {
+                    stepSize: 20, // Sets the interval for ticks on the y-axis
+                },
             },
-
             x: {
                 grid: {
                     display: false, // Hide grid lines on the x-axis
@@ -40,8 +42,8 @@ function LineChart() {
         },
     };
     return (
-        <div className='max-w-[700px]'>
-            <Line data={data} options={options} />
+        <div className=''>
+            <Line data={data} options={options}  height={320}/>
         </div>
     )
 }

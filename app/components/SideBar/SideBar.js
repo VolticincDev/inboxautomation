@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import React, { useState } from 'react'
 import DashBoardIconSVG from '../SVGs/DashBoardIconSVG'
 import EmailVerifyIconSVG from '../SVGs/EmailVerifyIconSVG'
@@ -17,17 +17,47 @@ import Dashboard from '../DashBoard/Dashboard';
 
 function SideBar() {
 
-    const [verifyEmail , setVerifyEmail] = useState();
+    const [verifyEmail, setVerifyEmail] = useState();
+    const [verifymodel, setVerifyModel] = useState(false);
+    const [safemodel, setSafeModel] = useState(false);
+    const [activeComponent, setActiveComponent] = useState('Dashboard');
+
+    const OpenVerifyModel = () => {
+        setVerifyModel(true)
+    }
+
+    const OpenSafeModel = () => {
+        setSafeModel(true)
+    }
 
     console.log(verifyEmail)
 
     const sidebar = [
-        { logo: <DashBoardIconSVG />, title: 'Dashboard' },
-        { logo: <EmailVerifyIconSVG />, title: 'Email Verification' },
-        { logo: <TaskResultIconSVG />, title: 'Task & Result' },
-        { logo: <ApiIntegrationIconSVG />, title: 'Api & Integration' },
-        { logo: <SettingIconSVG />, title: 'Setting' },
+        { logo: <DashBoardIconSVG />, title: 'Dashboard', component: 'Dashboard' },
+        { logo: <EmailVerifyIconSVG />, title: 'Email Verification', component: 'EmailVerification' },
+        { logo: <TaskResultIconSVG />, title: 'Task & Result', component: 'Task_and_Result' },
+        { logo: <ApiIntegrationIconSVG />, title: 'Api & Integration', component: 'Task_and_Result' },
+        { logo: <SettingIconSVG />, title: 'Setting', component: 'ProfileSettings' },
     ]
+
+    const renderComponent = () => {
+        switch (activeComponent) {
+            case 'Dashboard':
+                return <Dashboard />;
+            case 'EmailVerification':
+                return <EmailVerification />;
+            case 'Task_and_Result':
+                return <Task_and_Result />;
+            case 'AddCredits':
+                return <AddCredits />;
+            case 'ProfileSettings':
+                return <ProfileSettings />;
+            default:
+                return <Dashboard />;
+        }
+    };
+
+
     return (
         <nav>
             <div className='flex'>
@@ -37,10 +67,10 @@ function SideBar() {
                         <div className=''>
                             {
                                 sidebar.map((item, index) => (
-                                    <div className='flex items-center space-x-2 hover:bg-gray-500 py-4 pl-6 pr-2'>
+                                    <li key={index} className='flex items-center space-x-2 hover:bg-gray-500 py-4 pl-6 pr-2' onClick={() => setActiveComponent(item.component)}>
                                         {item.logo}
                                         <button className='text-[#9A9AA9] text-[16px] font-extrabold'>{item.title}</button>
-                                    </div>
+                                    </li>
                                 ))
                             }
                         </div>
@@ -77,21 +107,69 @@ function SideBar() {
                 {/* Sectio for flex */}
                 <div className='w-full flex flex-col h-screen bg-gray-100'>
                     <div className='flex justify-between items-center mt-11 px-6 mb-2'>
-                        <h1 className='text-[#030229] text-[24px] font-black '>Profile Settings</h1>
+                        <h1 className='text-[#030229] text-[24px] font-black '>{activeComponent}</h1>
                         <div className='flex items-center'>
                             <div className='bg-white px-4 py-2.5 rounded-l-lg'>
-                                <input type="text" name="" id="" placeholder='Enter Email Address' className='focus:outline-none' value={verifyEmail} onChange={(e) => setVerifyEmail(e.target.value)}/>
+                                <input type="text" name="" id="" placeholder='Enter Email Address' className='focus:outline-none' value={verifyEmail} onChange={(e) => setVerifyEmail(e.target.value)} />
                             </div>
-                            <button className='bg-primary text-[15px] text-[#323C47] font-semibold px-4 py-3 rounded-r-lg'>Verify</button>
+                            <button className='bg-primary text-[15px] text-[#323C47] font-semibold px-4 py-3 rounded-r-lg' onClick={OpenVerifyModel}>Verify</button>
                         </div>
+
+
+
+                        {verifymodel && (
+                            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+                                <div className='bg-white rounded-lg w-[500px]'>
+                                    <div className='py-6 px-20'>
+                                        <div className='flex items-center justify-center mb-4'>
+                                            <div className=''>
+                                                <h1 className='text-[42px] text-[#030229] font-semibold '>Verifiying</h1>
+                                            </div>
+                                            {/* <button className='font-bold' onClick={() => setVerifyModel(false)}>&#10005;</button> */}
+                                        </div>
+                                        <h3 className='w-[340px] text-[#030229] text-[18px] font-normal mb-4'>
+                                            We are verifiying your provided email address saadjaved5907@gmail.com as fast as possible.
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {safemodel && (
+                            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+                                <div className='bg-white rounded-lg w-[500px]'>
+                                    <div className='py-6 px-20'>
+                                        <div className='flex items-center justify-center mb-4'>
+                                            <div className=''>
+                                                <h1 className='text-[32px] text-[#030229] font-semibold '>Emails Successfully</h1>
+                                                <h1 className='text-[32px] text-[#030229] font-semibold text-center'>Submitted</h1>
+                                            </div>
+                                            {/* <button className='font-bold' onClick={() => setVerifyModel(false)}>&#10005;</button> */}
+                                        </div>
+                                        <h3 className='w-[330px] text-[#030229] text-[18px] font-normal mb-4'>
+                                            You have sucessfully submitted the emails.Now the verification will start automatically within few moments. Please note that, the required credits has been deducted from your account. However, after the verifcation completes, you will get credits refund for all the emails with “unknown” status.
+                                        </h3>
+                                        <div className='flex items-center space-x-3 px-6'>
+                                            <button className='px-10 py-2 bg-primary border border-[#D0D5DD] text-[#000000] rounded-md'>Cancel</button>
+                                            <button className='px-6 py-2 text-white bg-[#030229] rounded-lg'>Stay Here</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
                     </div>
 
-                    <div className='w-full h-full overflow-y-auto hide-scrollbar'>
+                    <div className='w-full h-full overflow-y-auto hide-scrollbar' onClick={() => setVerifyModel(false)}>
+
+                        {
+                            renderComponent()
+                        }
                         {/* <EmailVerification/> */}
                         {/* <Task_and_Result/> */}
                         {/* <AddCredits/> */}
                         {/* <ProfileSettings/> */}
-                        <Dashboard/>
+                        {/* <Dashboard /> */}
                     </div>
                 </div>
 

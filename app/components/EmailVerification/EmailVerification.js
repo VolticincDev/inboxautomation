@@ -1,12 +1,18 @@
-"use client"; 
+"use client";
 import React, { useState } from 'react'
 import StartVerificationSVG from '../SVGs/StartVerificationSVG'
 import UploadVerificationSVG from '../SVGs/UploadVerificationSVG'
 
 function EmailVerification() {
 
-    const [task , settask] = useState();
-    const [email , setemail] = useState();
+    const [task, settask] = useState();
+    const [email, setemail] = useState();
+
+    const [submitmodel, setSubmitmodel] = useState(false);
+    const OpenSafeModel = (event) => {
+        event.preventDefault();
+        setSubmitmodel(!submitmodel)
+    }
 
     // console.log(task)
     // console.log(email)
@@ -47,7 +53,7 @@ function EmailVerification() {
                     <div className=' flex justify-center items-center space-x-2 bg-primary px-20 py-3 rounded-xl mt-4'>
                         <StartVerificationSVG />
                         <div>
-                            <button className='text-[14px] text-[#030229] font-semibold'>Start Verification</button>
+                            <button className='text-[14px] text-[#030229] font-semibold' onClick={OpenSafeModel}>Start Verification</button>
                         </div>
 
                     </div>
@@ -61,30 +67,53 @@ function EmailVerification() {
                 <div className='flex flex-col items-center mx-4'>
                     <h1 className='text-[#030229] text-[18px] font-black mt-10'>Option 2: Direct Submit Email Addresses</h1>
 
-                    <form action="" className='flex flex-col items-center border w-[380px]'>
-                    <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Task Name</label>
-                    <div className='border border-[#9A9AA9] px-6 py-3 w-full rounded-xl'>
-                        <input type="text" className='focus:outline-none' placeholder='Enter a name' value={task} onChange={(e) => settask(e.target.value)}/>
-                    </div>
-                    
-
-                    <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Email Addresses</label>
-                    <div className='border border-[#9A9AA9] px-6 py-4 w-full rounded-xl'>
-                        <textarea name="" id="" cols="38" rows="6" placeholder='Enter email address one per line' className='focus:outline-none resize-none' value={email} onChange={(e) => setemail(e.target.value)}></textarea>
-                    </div>
-
-
-                    <div className=' flex justify-center items-center space-x-2 bg-primary px-20 py-3 rounded-xl mt-9'>
-                        <StartVerificationSVG />
-                        <div>
-                            <button className='text-[14px] text-[#030229] font-semibold'>Start Verification</button>
+                    <form action="" className='flex flex-col items-center w-[380px]'>
+                        <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Task Name</label>
+                        <div className='border border-[#9A9AA9] px-6 py-3 w-full rounded-xl'>
+                            <input type="text" className='focus:outline-none' placeholder='Enter a name' value={task} onChange={(e) => settask(e.target.value)} />
                         </div>
 
-                    </div>
+
+                        <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Email Addresses</label>
+                        <div className='border border-[#9A9AA9] px-6 py-4 w-full rounded-xl'>
+                            <textarea name="" id="" cols="38" rows="6" placeholder='Enter email address one per line' className='focus:outline-none resize-none' value={email} onChange={(e) => setemail(e.target.value)}></textarea>
+                        </div>
+
+
+                        <div className=' flex justify-center items-center space-x-2 bg-primary px-20 py-3 rounded-xl mt-9'>
+                            <StartVerificationSVG />
+                            <div>
+                                <button className='text-[14px] text-[#030229] font-semibold' onClick={OpenSafeModel}>Start Verification</button>
+                            </div>
+
+                        </div>
                     </form>
                 </div>
 
             </div>
+
+            {submitmodel && (
+                <div className='fixed inset-0 flex items-center justify-center'>
+                    <div className='bg-white rounded-lg w-[500px] border border-gray-500'>
+                        <div className='py-6 px-20'>
+                            <div className='flex items-center justify-center mb-4'>
+                                <div className=''>
+                                    <h1 className='text-[32px] text-[#030229] font-semibold '>Emails Successfully</h1>
+                                    <h1 className='text-[32px] text-[#030229] font-semibold text-center'>Submitted</h1>
+                                </div>
+                                {/* <button className='font-bold' onClick={() => setVerifyModel(false)}>&#10005;</button> */}
+                            </div>
+                            <h3 className='w-[330px] text-[#030229] text-[18px] font-normal mb-4'>
+                                You have sucessfully submitted the emails.Now the verification will start automatically within few moments. Please note that, the required credits has been deducted from your account. However, after the verifcation completes, you will get credits refund for all the emails with “unknown” status.
+                            </h3>
+                            <div className='flex items-center space-x-3 px-6'>
+                                <button className='px-10 py-2 bg-primary border border-[#D0D5DD] text-[#000000] rounded-md' onClick={OpenSafeModel}>Cancel</button>
+                                <button className='px-6 py-2 text-white bg-[#030229] rounded-lg'>Stay Here</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

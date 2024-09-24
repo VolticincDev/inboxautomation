@@ -30,10 +30,10 @@ function DonutChart() {
     labels: ['Part 1', 'Part 2', 'Part 3', 'Part 4'], // These labels won't show because legend is disabled
     datasets: [
       {
-        data: [40, 20, 14, 26], // Values for each partgit 
+        data: [40, 20, 15, 25], // Values for each part
         backgroundColor: ['#08E1D2', '#AD44FF', '#FF6B6B', '#FF8C62'], // Colors for each part
         hoverBackgroundColor: ['#08E1D2', '#AD44FF', '#FF6B6B', '#FF8C62'],
-        borderWidth: 1,
+        borderWidth: 0.5, // Decreased border width
       },
     ],
   };
@@ -52,8 +52,8 @@ function DonutChart() {
   };
 
   return (
-    <div style={{ width: '240px', height: '240px' , margin: '0 auto' }}> {/* Limit the width to keep the size like before */}
-      <Doughnut data={data} options={options} plugins={[customCenterText]} /> {/* Add the custom plugin */}
+    <div style={{ width: '240px', height: '240px' , margin: '0 auto' }}>
+      <Doughnut data={data} options={options} plugins={[customCenterText]} />
     </div>
   );
 }
