@@ -8,7 +8,7 @@ import SettingIconSVG from '../SVGs/SettingIconSVG'
 import CreditIconSVG from '../SVGs/CreditIconSVG'
 import ProfilePicSVG from '../SVGs/ProfilePicSVG'
 import LogoutIconSVG from '../SVGs/LogoutIconSVG'
-import './Sidebar.css'
+import './SideBar.css'
 import EmailVerification from '../EmailVerification/EmailVerification'
 import Task_and_Result from '../Task&Result/Task_and_Result';
 import AddCredits from '../Add Credits/AddCredits';
