@@ -20,7 +20,7 @@ function EmailVerification() {
 
 
     return (
-        <div className='flex lg:flex-row flex-col items-center space-x-8 mx-6 mt-8'>
+        <div className='flex lg:flex-row flex-col items-center lg:space-x-8 mx-6 mt-8'>
             <div className='min-w-[510px] max-h-[571px] bg-white px-10 rounded-3xl py-10'>
                 <div className='flex flex-col items-center'>
                     <h1 className='text-[#030229] text-[18px] font-black '>Option 1: Upload File For Verification</h1>
@@ -64,7 +64,7 @@ function EmailVerification() {
 
             {/* Second Box */}
 
-            <div className='minw-[510px] h-[571px] bg-white px-10 rounded-3xl'>
+            <div className='min-w-[510px] h-[571px] bg-white px-10 rounded-3xl lg:mt-0 sm:mt-10 mt-10'>
                 <div className='flex flex-col items-center mx-4'>
                     <h1 className='text-[#030229] text-[18px] font-black mt-10'>Option 2: Direct Submit Email Addresses</h1>
 

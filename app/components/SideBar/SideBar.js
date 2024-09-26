@@ -35,11 +35,11 @@ function SideBar() {
     console.log(verifyEmail)
 
     const sidebar = [
-        { logo: <DashBoardIconSVG />, title: 'Dashboard', component: 'Dashboard' },
-        { logo: <EmailVerifyIconSVG />, title: 'Email Verification', component: 'EmailVerification' },
-        { logo: <TaskResultIconSVG />, title: 'Task & Result', component: 'Task_and_Result' },
-        { logo: <ApiIntegrationIconSVG />, title: 'Api & Integration', component: 'Task_and_Result' },
-        { logo: <SettingIconSVG />, title: 'Setting', component: 'ProfileSettings' },
+        { logo: (isactive) => <DashBoardIconSVG isactive={isactive} />, title: 'Dashboard', component: 'Dashboard' },
+        { logo: (isactive) => <EmailVerifyIconSVG isactive={isactive} />, title: 'Email Verification', component: 'EmailVerification' },
+        { logo: (isactive) => <TaskResultIconSVG isactive={isactive} />, title: 'Task & Result', component: 'Task_and_Result' },
+        { logo: (isactive) => <ApiIntegrationIconSVG isactive={isactive} />, title: 'Api & Integration', component: 'API and Integration' },
+        { logo: (isactive) => <SettingIconSVG isactive={isactive} />, title: 'Setting', component: 'ProfileSettings' },
     ]
 
     const renderComponent = () => {
@@ -50,6 +50,8 @@ function SideBar() {
                 return <EmailVerification />;
             case 'Task_and_Result':
                 return <Task_and_Result />;
+            case 'API and Integration':
+                return <h1>Nothing Here</h1>;
             case 'AddCredits':
                 return <AddCredits />;
             case 'ProfileSettings':
@@ -69,12 +71,14 @@ function SideBar() {
                             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} bg-white`}>
                     <div className=''>
                         <h1 onClick={() => setSidebarOpen(!sidebarOpen)} className='text-center text-[22px] font-sans font-semibold mt-12 mb-16 cursor-pointer'>inbo<span className='text-[22px] font-extrabold'>x</span><span className='text-primary'>automation</span></h1>
+
                         <div className=''>
                             {
                                 sidebar.map((item, index) => (
-                                    <li key={index} className='flex items-center space-x-2  py-4 pl-6 pr-2 hover:bg-gradient-to-r hover:from-gray-200 hover:via-transparent hover:to-transparent' onClick={() => setActiveComponent(item.component)}>
-                                        {item.logo}
-                                        <button className='text-[#9A9AA9] text-[16px] font-extrabold'>{item.title}</button>
+                                    <li key={index} className={`flex items-center space-x-2  py-4 pl-6 pr-2  ${activeComponent === item.component ? 'bg-gradient-to-r from-gray-200 via-transparent to-transparent' : ''}`} onClick={() => setActiveComponent(item.component)}>
+                                        {typeof item.logo === 'function' ? item.logo(activeComponent === item.component) : item.logo}
+                                        {/* {item.logo(activeComponent === item.component)} */}
+                                        <button className={` text-[16px] font-extrabold ${activeComponent === item.component ? 'text-primary' : 'text-[#9A9AA9]'}`}>{item.title}</button>
                                     </li>
                                 ))
                             }
@@ -111,18 +115,20 @@ function SideBar() {
 
                 {/* Sectio for flex */}
                 <div className='w-full flex flex-col h-screen bg-gray-100'>
-                    <div className='flex justify-between items-center mt-11 px-6 mb-2'>
-                        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden text-black">
-                            {/* Hamburger icon */}
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                            </svg>
-                        </button>
+                    <div className='flex md:flex-row flex-col md:justify-between md:items-center md:mt-11 px-6 mb-2 md:space-y-0 space-y-3'>
+                        <div className='flex justify-between'>
+                            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden text-black">
+                                {/* Hamburger icon */}
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                                </svg>
+                            </button>
 
-                        <h1 className='text-[#030229] text-[24px] font-black '>{activeComponent}</h1>
+                            <h1 className='text-[#030229] text-[24px] font-black '>{activeComponent}</h1>
+                        </div>
 
                         <div className='flex items-center'>
-                            <div className='bg-white px-4 py-2.5 rounded-l-lg'>
+                            <div className='bg-white px-4 py-2.5 rounded-l-lg w-full'>
                                 <input type="text" name="" id="" placeholder='Enter Email Address' className='focus:outline-none' value={verifyEmail} onChange={(e) => setVerifyEmail(e.target.value)} />
                             </div>
                             <button className='bg-primary text-[15px] text-[#323C47] font-semibold px-4 py-3 rounded-r-lg' onClick={OpenVerifyModel}>Verify</button>
