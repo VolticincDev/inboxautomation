@@ -103,7 +103,7 @@ function AddCredits() {
                 </div>
 
 
-                {/* <div className='relative max-w-[333px] min-h-[356px] bg-white rounded-2xl xl:col-span-3 xl:justify-self-center pt-4 pb-10'>
+                <div className='relative max-w-[333px] min-h-[356px] bg-white rounded-2xl xl:col-span-3 xl:justify-self-center pt-4 pb-10'>
                     {
                         enterpriseusage.map((item, index) => (
                             <div className='pt-6'>
@@ -126,7 +126,7 @@ function AddCredits() {
                     <div className='absolute top-[-25px] z-30 left-20 bg-[#AD44FF] px-5 py-3 rounded-2xl'>
                         <h1>Enterprise Usage</h1>
                     </div>
-                </div> */}
+                </div>
 
             </div>
 
