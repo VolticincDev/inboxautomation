@@ -1,4 +1,6 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
+import LinkIconSVG from '../SVGs/LinkIconSVG';
+import ProfilePic2SVG from '../SVGs/ProfilePic2SVG';
 
 function ProfileSettings() {
 
@@ -9,7 +11,7 @@ function ProfileSettings() {
         setSubmitmodel((prev) => !prev);
     }
 
-    
+
 
     return (
         <div className='mb-10' >
@@ -84,8 +86,24 @@ function ProfileSettings() {
                 </div>
             </div>
 
+            <div className='max-w-[490px] ml-6 md:ml-20 mr-6 md:mr-0 px-6 py-6 bg-white mt-5 rounded-lg'>
+                <h1 className='text-[18px] texxt-[#030229] font-black text-center'>Change Profile Picture</h1>
+                <div className='flex lg:flex-row flex-col items-center md:space-x-5  mt-4'>
+                    <div>
+                        <ProfilePic2SVG />
+                    </div>
+                    <div>
+                        <LinkIconSVG />
+                    </div>
+                    <div>
+                        <h1 className='text-[#4F4E69] text-[18px] font-black md:text-left text-center'>Set Profile Picture</h1>
+                        <h1 className='text-[#4F4E69] text-[18px] font-black'>PNG Or JPG Format Image</h1>
+                    </div>
+                </div>
+            </div>
+
             {submitmodel && (
-                <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' onClick={(e) => {e.stopPropagation(); OpenSafeModel()}}>
+                <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' onClick={(e) => { e.stopPropagation(); OpenSafeModel() }}>
                     <div className='bg-white rounded-lg w-[500px] border border-gray-500' onClick={(e) => e.stopPropagation()}>
                         <div className='py-6 px-20'>
                             <div className='flex items-center justify-center mb-4'>
@@ -99,7 +117,7 @@ function ProfileSettings() {
                                 You have sucessfully submitted the emails.Now the verification will start automatically within few moments. Please note that, the required credits has been deducted from your account. However, after the verifcation completes, you will get credits refund for all the emails with “unknown” status.
                             </h3>
                             <div className='flex items-center space-x-3 px-6'>
-                                <button className='px-10 py-2 bg-primary border border-[#D0D5DD] text-[#000000] rounded-md' onClick={(e) =>OpenSafeModel()}>Cancel</button>
+                                <button className='px-10 py-2 bg-primary border border-[#D0D5DD] text-[#000000] rounded-md' onClick={(e) => OpenSafeModel()}>Cancel</button>
                                 <button className='px-6 py-2 text-white bg-[#030229] rounded-lg' >Stay Here</button>
                             </div>
                         </div>

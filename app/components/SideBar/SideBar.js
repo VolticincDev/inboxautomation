@@ -56,6 +56,8 @@ function SideBar() {
                 return <AddCredits />;
             case 'ProfileSettings':
                 return <ProfileSettings />;
+            case 'AddCredits':  // Add Credits case handled here
+                return <AddCredits />;
             default:
                 return <Dashboard />;
         }
@@ -92,7 +94,7 @@ function SideBar() {
 
                             </div>
                             <div className='px-4 '>
-                                <button className='bg-primary text-[15px] text-[#5E5E5E] font-semibold rounded-xl text-center mt-28 w-full py-3'>Add Credits</button>
+                                <button onClick={() => setActiveComponent('AddCredits')} className='bg-primary text-[15px] text-[#5E5E5E] font-semibold rounded-xl text-center mt-28 w-full py-3'>Add Credits</button>
 
                             </div>
                         </div>
@@ -115,7 +117,7 @@ function SideBar() {
 
                 {/* Sectio for flex */}
                 <div className='w-full flex flex-col h-screen bg-gray-100'>
-                    <div className='flex md:flex-row flex-col md:justify-between md:items-center md:mt-11 px-6 mb-2 md:space-y-0 space-y-3'>
+                    <div className='flex md:flex-row flex-col md:justify-between md:items-center md:mt-11 mt-6 px-6 mb-2 md:space-y-0 space-y-3'>
                         <div className='flex justify-between'>
                             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden text-black">
                                 {/* Hamburger icon */}

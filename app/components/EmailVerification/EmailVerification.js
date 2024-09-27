@@ -21,7 +21,7 @@ function EmailVerification() {
 
     return (
         <div className='flex lg:flex-row flex-col items-center lg:space-x-8 mx-6 mt-8'>
-            <div className='min-w-[510px] max-h-[571px] bg-white px-10 rounded-3xl py-10'>
+            <div className='  lg:min-w-[510px] lg:max-h-[571px] bg-white px-10 rounded-3xl py-10'>
                 <div className='flex flex-col items-center'>
                     <h1 className='text-[#030229] text-[18px] font-black '>Option 1: Upload File For Verification</h1>
 
@@ -64,34 +64,31 @@ function EmailVerification() {
 
             {/* Second Box */}
 
-            <div className='min-w-[510px] h-[571px] bg-white px-10 rounded-3xl lg:mt-0 sm:mt-10 mt-10'>
-                <div className='flex flex-col items-center mx-4'>
+            <div className='lg:min-w-[510px] lg:max-h-[571px] bg-white px-10 rounded-3xl lg:mt-0 sm:mt-10 mt-10'>
+                <div className='flex flex-col items-center'>
                     <h1 className='text-[#030229] text-[18px] font-black mt-10'>Option 2: Direct Submit Email Addresses</h1>
 
-                    <form action="" className='flex flex-col items-center w-[380px]'>
+                    <form action="" className='flex flex-col items-center w-full max-w-[380px]'>
                         <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Task Name</label>
                         <div className='border border-[#9A9AA9] px-6 py-3 w-full rounded-xl'>
-                            <input type="text" className='focus:outline-none' placeholder='Enter a name' value={task} onChange={(e) => settask(e.target.value)} />
+                            <input type="text" className='focus:outline-none w-full' placeholder='Enter a name' value={task} onChange={(e) => settask(e.target.value)} />
                         </div>
-
 
                         <label htmlFor="" className='text-[#030229] text-[18px] font-semibold mt-12'>Email Addresses</label>
                         <div className='border border-[#9A9AA9] px-6 py-4 w-full rounded-xl'>
-                            <textarea name="" id="" cols="38" rows="6" placeholder='Enter email address one per line' className='focus:outline-none resize-none' value={email} onChange={(e) => setemail(e.target.value)}></textarea>
+                            <textarea name="" id="" cols="38" rows="6" placeholder='Enter email address one per line' className='focus:outline-none resize-none w-full' value={email} onChange={(e) => setemail(e.target.value)}></textarea>
                         </div>
-
 
                         <div className=' flex justify-center items-center space-x-2 bg-primary px-20 py-3 rounded-xl mt-9'>
                             <StartVerificationSVG />
                             <div>
                                 <button className='text-[14px] text-[#030229] font-semibold' onClick={OpenSafeModel}>Start Verification</button>
                             </div>
-
                         </div>
                     </form>
                 </div>
-
             </div>
+
 
             {submitmodel && (
                 <div className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50' onClick={OpenSafeModel}>

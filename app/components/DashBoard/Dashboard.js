@@ -9,6 +9,8 @@ function Dashboard() {
 
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+
 
     useEffect(() => {
         const currentYear = new Date().getFullYear();
@@ -24,8 +26,9 @@ function Dashboard() {
     }, []);
 
     // Handle year change
-    const handleYearChange = (e) => {
-        setSelectedYear(e.target.value);
+    const handleYearChange = (year) => {
+        setSelectedYear(year);
+        setIsOpen(false); // Close dropdown after selecting year
     };
 
     const tabledata = [
@@ -46,7 +49,7 @@ function Dashboard() {
                 <div className='w-[400px] h-[408px] bg-white rounded-xl md:mt-0 mt-5'>
                     <div className='flex items-center justify-between bg-white p-4 rounded-lg'>
                         <h1 className='text-[#030229] text-[18px] font-black'>Lifetime Usage</h1>
-                        <div className='border rounded-full px-3 py-1.5'>
+                        {/* <div className='border rounded-full px-3 py-1.5'>
                             <select
                                 name="year"
                                 id="yearDropdown"
@@ -60,6 +63,32 @@ function Dashboard() {
                                     </option>
                                 ))}
                             </select>
+                        </div> */}
+                        <div className="relative inline-block">
+                            {/* Button with compact size */}
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="border rounded-full px-3 py-1.5 text-[12px] font-semibold focus:outline-none bg-white shadow-md"
+                            >
+                                {selectedYear}
+                                <span className="ml-2">&#9662;</span> {/* Down arrow icon */}
+                            </button>
+
+                            {/* Dropdown */}
+                            {isOpen && (
+                                <ul className="absolute z-10 mt-2 w-full max-h-40 overflow-y-auto bg-white border rounded-lg shadow-lg hide-scrollbar">
+                                    {years.map((year) => (
+                                        <li
+                                            key={year}
+                                            onClick={() => handleYearChange(year)}
+                                            className={`px-4 py-2 cursor-pointer hover:bg-primary hover:text-white transition-colors ${year === selectedYear ? 'bg-primary text-white' : ''
+                                                }`}
+                                        >
+                                            {year}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                     <div className='px-10 pb-10 pt-2'>
@@ -70,7 +99,7 @@ function Dashboard() {
             </div>
 
             <div className='flex md:flex-row flex-col md:items-center md:space-x-10 md:mt-5 md:mb-5'>
-                <div className='w-[400px] md:w-[600px] lg:w-[650px] md:bg-white lg:bg-red-300 xl:bg-blue-300 px-8 py-6 rounded-lg'>
+                <div className='w-[400px] md:w-[600px] lg:w-[650px] bg-white px-8 py-6 rounded-lg'>
                     <h1 className='text-[#030229] text-[18px] font-black text-center mb-4'>Credit History</h1>
                     <div className='w-full overflow-x-auto lg:overflow-visible'>
                         <table className='w-[600px] px-4'>
@@ -104,22 +133,33 @@ function Dashboard() {
 
                 {/* <PlotArea/> */}
                 <div className='w-[400px] h-[310px] bg-white rounded-xl'>
-                    <div className='flex items-center justify-between bg-white px-4 pt-4 pt-2 rounded-lg'>
-                        <h1 className='text-[#030229] text-[18px] font-black'>Lifetime Usage</h1>
-                        <div className='border rounded-full px-3 py-1.5'>
-                            <select
-                                name="year"
-                                id="yearDropdown"
-                                value={selectedYear}
-                                onChange={(e) => setSelectedYear(e.target.value)}
-                                className='focus:outline-none text-[12px] font-semibold'
+                    <div className='flex items-center justify-between bg-white px-4 pt-4 rounded-lg'>
+                        <h1 className='text-[#030229] text-[18px] font-black'>Statistics</h1>
+                        <div className="relative inline-block">
+                            {/* Button with compact size */}
+                            <button
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="border rounded-full px-3 py-1.5 text-[12px] font-semibold focus:outline-none bg-white shadow-md"
                             >
-                                {years.map((year) => (
-                                    <option key={year} value={year}>
-                                        {year}
-                                    </option>
-                                ))}
-                            </select>
+                                {selectedYear}
+                                <span className="ml-2">&#9662;</span> {/* Down arrow icon */}
+                            </button>
+
+                            {/* Dropdown */}
+                            {isOpen && (
+                                <ul className="absolute z-10 mt-2 w-full max-h-40 overflow-y-auto bg-white border rounded-lg shadow-lg hide-scrollbar">
+                                    {years.map((year) => (
+                                        <li
+                                            key={year}
+                                            onClick={() => handleYearChange(year)}
+                                            className={`px-4 py-2 cursor-pointer hover:bg-primary hover:text-white transition-colors ${year === selectedYear ? 'bg-primary text-white' : ''
+                                                }`}
+                                        >
+                                            {year}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                     <div className='px-6 pb-2'>
